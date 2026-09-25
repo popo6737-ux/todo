@@ -1,6 +1,6 @@
 # 속초 세일즈 워크샵 비교
 
-**사이트 주소:** [속초 세일즈 워크샵 비교 열기](https://sokcho-sales-workshop-dongju-2026.popo6737.chatgpt.site)
+**사이트 주소:** [속초 세일즈 워크샵 비교 열기](https://sokcho-team-workshop.popo6737.chatgpt.site)
 
 사이트는 로그인 없이 열 수 있습니다. 링크를 아는 누구나 볼 수 있으므로 내부 기밀이나 개인 정보를 입력하지 마세요. 이 GitHub 저장소도 공개되어 있으며, 사이트는 GitHub Pages가 아닌 Sites에서 호스팅합니다.
 
