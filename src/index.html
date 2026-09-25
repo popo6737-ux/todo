@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102d37">
+  <title>속초 세일즈 워크샵 | 후보 비교</title>
+  <meta name="description" content="8인 속초 세일즈 워크샵의 숙박, 활동, 식사, 비용과 일정을 비교하는 비공개 플래너">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-inner">
+        <div class="topline"><div class="brand"><span class="brand-mark">S</span><span>SALES OFFSITE / SOKCHO</span></div><span class="private-pill">● PRIVATE PLANNER</span></div>
+        <div class="hero-main"><div><p class="eyebrow">TEAM WORKSHOP · 1 NIGHT / 2 DAYS</p><h1 id="page-title">첫날은 울산바위.<br><em>다음 날은 속초의 여유.</em></h1><p class="hero-copy">오전 등반, 저녁 회복. 세일즈 미팅은 둘째 날에 필요할 때만.<br>숙소와 점심·산책 동선을 세 가지 안으로 비교해 보세요.</p></div><div class="hero-art" aria-hidden="true"><span class="sun"></span><span class="ridge ridge-back"></span><span class="ridge ridge-front"></span><span class="wave wave-one"></span><span class="wave wave-two"></span><span class="art-caption">SOKCHO, GANGWON · 38.2° N</span></div></div>
+        <div class="hero-foot"><span>DAY 1 / 울산바위 등반</span><span>DAY 2 / 선택 미팅 · 점심 · 산책</span></div>
+      </div>
+    </section>
+
+    <section class="workspace" aria-labelledby="compare-heading">
+      <div class="section-header"><div><p class="eyebrow dark">YOUR DECISION DESK</p><h2 id="compare-heading">워크샵 설계하기</h2></div><p class="section-intro">세 후보 모두 첫날 울산바위를 오릅니다. 차이는 숙소와 둘째 날 동선입니다.</p></div>
+      <div class="hike-banner"><strong>DAY 1 · 공통 산행</strong><span>소공원 → 흔들바위 → 울산바위 → 소공원 · 왕복 약 7.6km, 단체 일정 5시간 확보</span><a href="https://www.knps.or.kr/front/portal/visit/visitCourseSubMain.do?menuNo=7020093&parkId=120400" target="_blank" rel="noopener">입산 시간·통제 확인 ↗</a></div>
+      <div class="controls">
+        <div class="input-pair"><label>참석 인원 <span>명</span><input id="people" type="number" min="1" max="40" step="1" inputmode="numeric"></label><label>총예산 <span>원</span><input id="budget" type="text" inputmode="numeric" autocomplete="off" aria-label="총예산 (원)"></label></div>
+        <fieldset class="priority-field"><legend>어떤 워크샵을 원하세요?</legend><div class="segmented" id="priority"><label><input type="radio" name="priority" value="balance"><span>균형</span></label><label><input type="radio" name="priority" value="team"><span>팀 결속</span></label><label><input type="radio" name="priority" value="rest"><span>휴식</span></label><label><input type="radio" name="priority" value="budget"><span>예산 절약</span></label></div></fieldset>
+        <div class="checks"><label class="check"><input type="checkbox" id="privateRooms"><span>침실 내 욕실 2개 이상 확인</span></label><label class="check"><input type="checkbox" id="rain"><span>우천·통제 우려</span></label></div>
+      </div>
+      <div class="recommendation" id="recommendation" aria-live="polite"></div>
+      <div class="card-heading"><div><p class="eyebrow dark">THREE WAYS TO GO</p><h2>후보를 나란히</h2></div><p>카드를 선택하면 상세 견적을 수정할 수 있습니다.</p></div>
+      <div id="cards" class="cards"></div>
+    </section>
+
+    <section class="detail-section" aria-labelledby="detail-heading">
+      <div class="detail-wrap"><div class="section-header"><div><p class="eyebrow dark">COST WORKBENCH</p><h2 id="detail-heading">선택한 안의 상세 견적</h2></div><button class="text-button" id="reset" type="button">처음 값으로 되돌리기 ↗</button></div><div class="detail-grid"><div id="detail" class="detail-content"></div><aside class="estimate"><p class="eyebrow">LIVE ESTIMATE</p><div id="estimate"></div><p class="estimate-foot">모든 금액은 기획용 가정입니다. 숙박비는 예약 가능 여부나 날짜별 실제 요금을 확인한 값이 아닙니다. 이동비는 팀 차량 2대의 유류·통행료를 가정하며 차량 대여비는 포함하지 않습니다.</p></aside></div>
+      <footer><span>속초 세일즈 워크샵 · 내부 검토용</span><span>현지 정보: <a href="https://www.knps.or.kr/front/portal/visit/visitCourseSubMain.do?menuNo=7020093&parkId=120400" target="_blank" rel="noopener">국립공원공단 ↗</a> · <a href="https://www.sokcho.go.kr/ct/tour" target="_blank" rel="noopener">속초관광 ↗</a></span></footer></div>
+    </section>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
