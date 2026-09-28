@@ -32,15 +32,15 @@ export const CANDIDATES = [
     cost: { roomQty: 1, roomUnit: 420000, lunch1: 15000, dinner: 35000, breakfast: 12000, lunch2: 22000, activity: 80000, transport: 190000, buffer: 80000 }
   },
   {
-    id: 'value', no: '03', title: '개별 욕실 독채', subtitle: '네 침실 모두 욕실이 안내되고, 미팅 공간도 있음',
-    tag: '욕실 조건 확인', area: '양양 손양면 → 낙산권', lodging: '요트랑 클럽하우스 · 독채 1동 / 침실 4 · 객실별 욕실',
+    id: 'value', no: '03', title: '확정 일정 · 양양 독채', subtitle: '요트랑펜션 숙박 · 장보기 BBQ · 낙원식당 점심',
+    tag: '10/15 숙소 예약', area: '울산바위 → 양양 → 점심·산책', lodging: '양양 요트랑펜션 · 예약 완료 (10월 15~16일)',
     lodgingUrl: 'https://www.airbnb.co.kr/rooms/716231742019185743',
-    lodgingNote: '숙소 안내에 침실 4개 모두 개별 욕실, 8인 기준·최대 15인, 1층 세미나실로 표시. 양양 소재로 속초보다 복귀 동선이 달라집니다. 실제 1박 요금·주차·미팅 공간 확인 필요.',
+    lodgingNote: '2026년 10월 15일 입실(15:00) · 16일 퇴실(11:00 전). 숙소 안내의 침실 4개와 개별 욕실 구성은 예약 객실과 대조 확인하세요. 칠판의 숙박 60만 원은 계획액입니다. 객실 내 구이·흡연, 반려동물, 개인 버너 사용이 제한됩니다. 야외 BBQ는 우천 시 이용 불가하므로 실내 구이로 대체하지 말고 식사 대안을 준비하세요. 요트 체험은 1인 25,000원 선택 옵션이며 날씨에 따라 불가할 수 있습니다. 추가 침구는 세트당 20,000원입니다.',
     capacityPerRoom: 15, bedrooms: 4, bathrooms: 7, ensuiteVerified: 4,
-    day1: [['06:00', '수도권 출발 (팀 차량 2대 가정)'], ['09:00', '설악산 소공원 도착 · 준비'], ['09:30–14:30', '울산바위 왕복 등반 · 중간에 준비한 도시락과 휴식'], ['15:30', '양양 독채 체크인 · 자유 휴식'], ['18:30', '양양에서 팀 저녁 식사']],
-    day2: [['08:30', '아침 식사'], ['09:30', '선택: 세일즈 자료 미팅 60분 (숙소 세미나실 확인)'], ['11:30', '낙산권에서 생선구이 등으로 점심'], ['12:40', '낙산해변 짧은 산책'], ['14:00', '복귀 출발']],
+    day1: [['출발', '팀 출발 · 설악산 소공원 이동'], ['09:30', '등반 준비 · 도시락과 물 챙기기'], ['10:00–14:00', '울산바위 왕복 등반 · 준비한 도시락'], ['14:00–15:00', '양양 이동'], ['15:00–16:30', '요트랑펜션 체크인 · 휴식 (체크인 15:00부터)'], ['16:30 이후', '장을 보고 야외 BBQ · 고기 2kg, 회, 식음료 (우천 시 대체 식사 필요)']],
+    day2: [['오전', '아침 식사 (금액 미입력)'], ['오전', '선택: 세일즈 자료 미팅 60분 (시간이 필요할 때)'], ['11:00 전', '요트랑펜션 체크아웃 · 전원 확인'], ['점심', '낙원식당에서 점심 · 8명 계획액 20만 원'], ['식후', '식당 주변 가벼운 산책 · 장소는 동선 확인 후 결정'], ['오후', '복귀 출발']],
     traits: { team: 4, rest: 3 },
-    cost: { roomQty: 1, roomUnit: 520000, lunch1: 15000, dinner: 35000, breakfast: 12000, lunch2: 22000, activity: 80000, transport: 200000, buffer: 80000 }
+    cost: { roomQty: 1, roomUnit: 600000, lunch1: 20000, dinner: 0, breakfast: null, lunch2: 25000, bbqMeat: 96000, sashimi: 150000, drinks: 100000, activity: null, transport: null, buffer: null }
   }
 ];
 
@@ -51,6 +51,9 @@ export const COST_ROWS = [
   { key: 'dinner', label: 'Day 1 저녁 · 1인', unit: '원', kind: 'person' },
   { key: 'breakfast', label: 'Day 2 아침 · 1인', unit: '원', kind: 'person' },
   { key: 'lunch2', label: 'Day 2 점심 · 1인', unit: '원', kind: 'person' },
+  { key: 'bbqMeat', label: 'Day 1 BBQ 고기 2kg · 팀 전체', unit: '원', kind: 'fixed', confirmedOnly: true },
+  { key: 'sashimi', label: 'Day 1 회 · 팀 전체', unit: '원', kind: 'fixed', confirmedOnly: true },
+  { key: 'drinks', label: 'Day 1 식음료·잡비 · 팀 전체', unit: '원', kind: 'fixed', confirmedOnly: true },
   { key: 'activity', label: '산행 물·간식 등 · 팀 전체', unit: '원', kind: 'fixed' },
   { key: 'transport', label: '이동 · 팀 전체', unit: '원', kind: 'fixed' },
   { key: 'buffer', label: '예비비 · 팀 전체', unit: '원', kind: 'fixed' }
@@ -61,13 +64,14 @@ export function calculate(candidate, settings) {
   const people = Math.max(1, Number(settings.people) || 1);
   const items = {
     stay: c.roomQty * c.roomUnit,
-    meals: people * (c.lunch1 + c.dinner + c.breakfast + c.lunch2),
-    activity: c.activity,
-    transport: c.transport,
-    buffer: c.buffer
+    meals: people * ((c.lunch1 || 0) + (c.dinner || 0) + (c.breakfast || 0) + (c.lunch2 || 0)) + (c.bbqMeat || 0) + (c.sashimi || 0) + (c.drinks || 0),
+    activity: c.activity || 0,
+    transport: c.transport || 0,
+    buffer: c.buffer || 0
   };
   const total = Object.values(items).reduce((a, b) => a + b, 0);
-  return { items, total, perPerson: Math.ceil(total / people), remaining: Number(settings.budget) - total,
+  const missing = candidate.id === 'value' ? ['breakfast', 'transport'].filter(key => c[key] == null) : [];
+  return { items, total, perPerson: Math.ceil(total / people), remaining: Number(settings.budget) - total, missing,
     capacity: c.roomQty * candidate.capacityPerRoom, costs: c };
 }
 

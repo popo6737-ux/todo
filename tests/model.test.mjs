@@ -19,11 +19,27 @@ test('changing whole-home price and people recalculates costs', () => {
   assert.equal(result.perPerson, 176429);
 });
 
+test('booked Yangyang plan totals only entered whiteboard costs and responds to transport', () => {
+  const candidate = CANDIDATES.find(x => x.id === 'value');
+  const result = calculate(candidate, DEFAULTS);
+  assert.equal(result.total, 1306000);
+  assert.equal(result.perPerson, 163250);
+  assert.equal(result.remaining, 294000);
+  assert.deepEqual(result.missing, ['breakfast', 'transport']);
+  const revised = calculate(candidate, { ...DEFAULTS, overrides: { value: { transport: 180000, breakfast: 10000 } } });
+  assert.equal(revised.total, 1566000);
+  assert.equal(revised.remaining, 34000);
+  assert.deepEqual(revised.missing, []);
+  assert.match(candidate.day1.at(-1)[1], /장을 보고 야외 BBQ/);
+  assert.match(candidate.day2.map(([, item]) => item).join(' '), /낙원식당/);
+  assert.match(candidate.day2.map(([, item]) => item).join(' '), /11:00 전|체크아웃/);
+});
+
 test('recommendation requires two confirmed en-suite bathrooms by default', () => {
   assert.equal(rankCandidates(DEFAULTS)[0].candidate.id, 'value');
   assert.deepEqual(rankCandidates(DEFAULTS).filter(x => x.fits).map(x => x.candidate.id), ['value']);
   assert.equal(rankCandidates({ ...DEFAULTS, privateRooms: false, priority: 'team' })[0].candidate.id, 'conversation');
-  assert.equal(rankCandidates({ ...DEFAULTS, privateRooms: false, priority: 'budget' })[0].candidate.id, 'recharge');
+  assert.equal(rankCandidates({ ...DEFAULTS, privateRooms: false, priority: 'budget' })[0].candidate.id, 'value');
   assert.equal(rankCandidates({ ...DEFAULTS, budget: 1000000 })[0].fits, false);
   assert.equal(rankCandidates({ ...DEFAULTS, people: 9 })[0].fits, false);
 });
