@@ -46,7 +46,7 @@ test('recommendation requires two confirmed en-suite bathrooms by default', () =
 
 test('every candidate keeps Day 1 hike and Day 2 optional sales meeting', () => {
   for (const candidate of CANDIDATES) {
-    assert.match(candidate.day1.map(([,item]) => item).join(' '), /울산바위 왕복 등반/);
+    assert.match(candidate.day1.map(([,item]) => item).join(' '), /흔들바위 왕복 등반/);
     assert.doesNotMatch(candidate.day1.map(([,item]) => item).join(' '), /세일즈 자료 미팅/);
     assert.match(candidate.day2.map(([,item]) => item).join(' '), /선택: 세일즈 자료 미팅/);
     assert.match(candidate.day2.map(([,item]) => item).join(' '), /점심/);
